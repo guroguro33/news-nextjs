@@ -19,8 +19,8 @@ function Header():JSX.Element {
                 <h1 style={{ letterSpacing: "1px", textAlign: "left" }}>
                     <Link href="/">
                         <a href="">
-                            <span style={{ fontWeight: 250 }}>Simple</span>
-                            <span style={{ fontWeight: 100 }}>News</span>
+                            <span style={{ fontWeight: 250 }}>BTM</span>
+                            <span style={{ fontWeight: 100 }}>AreaNews</span>
                         </a>
                     </Link>
                 </h1>
