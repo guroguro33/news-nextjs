@@ -2,10 +2,19 @@
   padding: 0 2rem;
 }
 
+.nav {
+  flex: 2;
+  position: fixed;
+}
+
+.blank {
+  flex: 2;
+}
+
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  //   padding: 4rem 0;
+  flex: 6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,6 +63,11 @@
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+}
+
+.contents {
+  display: flex;
+  margin: 0 auto;
 }
 
 .code {

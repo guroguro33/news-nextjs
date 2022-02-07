@@ -9,7 +9,7 @@ type Props = {
         }
     ],
     title?: string,
-    weatherNews?: {
+    weather?: {
         current: {
             temp: number,
             clouds: number,
@@ -22,20 +22,18 @@ type Props = {
         },
         daily: [
             date: {
-                date: {
-                    at: number,
-                    clouds: number,
-                    temp: {
-                        min: number,
-                        max: number
-                    },
-                    weather: [
-                        conditions: {
-                            id: number,
-                            icon: string
-                        }
-                    ]
-                }
+                at: number,
+                clouds: number,
+                temp: {
+                    min: number,
+                    max: number
+                },
+                weather: [
+                    conditions: {
+                        id: number,
+                        icon: string
+                    }
+                ]
             }
         ]
     }
