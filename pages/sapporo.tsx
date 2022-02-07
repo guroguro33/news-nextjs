@@ -12,7 +12,7 @@ const Home: NextPage = (props) => {
     return (
         <MainLayout>
             <Head>
-                <title>BTM Area News</title>
+                <title>Sapporo | BTM Area News</title>
             </Head>
             <div className={styles.contents}>
                 <div className={styles.nav}>
@@ -22,7 +22,7 @@ const Home: NextPage = (props) => {
                 </div>
                 <div className={styles.blank} />
                 <div className={styles.main}>
-                    <Article title="Area Topics" articles={props.topArticles}/>
+                    <Article title="sapporo" articles={props.topArticles}/>
                 </div>
             </div>
         </MainLayout>
@@ -34,7 +34,7 @@ export default Home
 export const getStaticProps = async () => {
     // newsAPIの記事を取得
     const articleCount = 10
-    const keyword = '東京 OR 大阪 OR 福岡 OR 札幌'
+    const keyword = '札幌'
     const startDate = moment().subtract(1, 'weeks').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
     const apiKey = '053272abb2004f4e805929dc8d343e51'
