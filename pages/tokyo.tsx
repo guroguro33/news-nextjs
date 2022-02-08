@@ -40,9 +40,9 @@ export const getStaticProps = async () => {
     const keyword = '東京'
     const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
-    const apiKey = '053272abb2004f4e805929dc8d343e51'
+    const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     const topRes = await fetch(
-        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${apiKey}`
+        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${newsApiKey}`
     )
     const topJson = await topRes.json()
     const topArticles = topJson?.articles
@@ -51,8 +51,9 @@ export const getStaticProps = async () => {
     const lat = 35.4122
     const lon = 139.4130
     const exclude = "hourly,minutely"
+    const weatherApiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_HASH
     const weatherRes = await fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${exclude}&appid=5106568248a9c63cec4f9b2f81fd127f`
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${exclude}&appid=${weatherApiKey}`
     )
     const weather = await weatherRes.json() 
 

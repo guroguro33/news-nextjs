@@ -37,9 +37,9 @@ export const getStaticProps = async () => {
     const keyword = '大阪'
     const startDate = moment().subtract(1, 'weeks').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
-    const apiKey = '053272abb2004f4e805929dc8d343e51'
+    const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     const topRes = await fetch(
-        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${apiKey}`
+        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${newsApiKey}`
     )
     const topJson = await topRes.json()
     const topArticles = topJson?.articles
