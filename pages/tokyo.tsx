@@ -8,7 +8,6 @@ import styles from '../styles/Home.module.scss'
 import moment from 'moment'
 
 const Home: NextPage = (props) => {
-    console.log({props})
     return (
         <MainLayout>
             <Head>
@@ -25,7 +24,7 @@ const Home: NextPage = (props) => {
                     <Article title="tokyo" articles={props.topArticles}/>
                 </div>
                 <div className={styles.aside}>
-                    <Weather weather={props.weather}/>
+                    <Weather title='tokyo' weather={props.weather}/>
                 </div>
             </div>
         </MainLayout>
@@ -62,7 +61,7 @@ export const getStaticProps = async () => {
             topArticles,
             weather
         },
-        revalidate: 60 * 1 // とりあえず1時間
+        revalidate: 60 * 1
     }
 }
 

@@ -5,7 +5,10 @@ type Props = {
             title: string,
             publishedAt: string,
             url: string,
-            urlToImage: string
+            urlToImage: string,
+            source: {
+                name: string
+            }
         }
     ],
     title?: string,
@@ -28,6 +31,7 @@ type Props = {
                     min: number,
                     max: number
                 },
+                dt: number,
                 weather: [
                     conditions: {
                         id: number,

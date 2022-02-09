@@ -1,28 +1,28 @@
 import Image from 'next/image'
-import styles from '../weather/area.module.scss'
+import styles from '../weather/index.module.scss'
 import Link from 'next/link'
 import Props from '../types'
 
 const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const Weather: React.FC<Props> = ({weather}) => {
+const Weather: React.FC<Props> = ({weather, title}) => {
     const currentWeatherMain = weather.current.weather[0].main
-    const currentWeatherTemp = weather.current.temp
+    const currentWeatherTemp = Math.round(weather.current.temp)
     const currentWeatherIcon = weather.current.weather[0].icon.slice(0, 2) + 'd'
-    console.log({currentWeatherIcon})
+    console.log({weather})
     return (
         <section className={styles.weather}>
-            <h1>Tokyo</h1>
+            <h1>{title && title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}</h1>
             <div className={styles.weather__main}>
                 <div className={styles.weather__top}>
                     <div className={styles.weather__heading}>
                         <a>{currentWeatherMain}</a>
-                        <p>{currentWeatherTemp.toString().slice(0, 1)}<span>°C</span></p>
+                        <p>{currentWeatherTemp}<span>°C</span></p>
                     </div>
                     <Image
                         className={styles.weather__icon}
-                        src={`/img/weatherIcons/${currentWeatherIcon}.png`}
-                        alt="Tokyo's weather icon"
+                        src={`/img/weatherIcons/${currentWeatherIcon}.svg`}
+                        alt={`${title} && ${title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}'s weather icon`}
                         loading='eager'
                         width={52}
                         height={52}
@@ -39,13 +39,12 @@ const Weather: React.FC<Props> = ({weather}) => {
                             if (index > 4) {
                                 return
                             }
-                            console.log(date.weather[0].icon)
                             return (
                                 <li key={index}>
                                     <p>{day}</p>
                                     <span>
                                         <Image
-                                            src={`/img/weatherIcons/${date.weather[0].icon}.png`}
+                                            src={`/img/weatherIcons/${date.weather[0].icon}.svg`}
                                             className={styles.weather__icon}
                                             alt={`${day}'s weather icon`}
                                             loading='eager'
@@ -56,10 +55,10 @@ const Weather: React.FC<Props> = ({weather}) => {
                                     </span>
                                     <div className={styles.weather__temp}>
                                         <p className={styles.weather__temp__high}>
-                                            {parseInt(date.temp.max.toLocaleString(), 10)}°C
+                                            {Math.round(date.temp.max)}°C
                                         </p>
                                         <p className={styles.weather__temp__low}>
-                                            {parseInt(date.temp.min.toLocaleString(), 10)}°C
+                                            {Math.round(date.temp.min)}°C
                                         </p>
                                     </div>
                                 </li>

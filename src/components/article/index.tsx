@@ -4,10 +4,11 @@ import Image from 'next/image'
 import Props from "../types"
 
 const Article: React.FC<Props> = ({ articles, title }) => {
+    // console.log({articles})
     return (
         <section className={styles.article}>
             <div className={styles.article__heading}>
-                <h1>{title && title.charAt(0).toUpperCase() + title.slice(1).toLowerCase() }</h1>
+                <h1>{title && title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}</h1>
             </div>
             {articles && articles.map((article, index) => {
                 const time = moment(article.publishedAt).fromNow().slice(0, 1) 
