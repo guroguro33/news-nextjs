@@ -5,10 +5,10 @@ import Article from '../src/components/article'
 import Nav from '../src/components/nav'
 import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
+import Weather from '../src/components/weather/area'
 import moment from 'moment'
 
 const Home: NextPage = (props) => {
-    console.log(props.topArticles)
     return (
         <MainLayout>
             <Head>
@@ -24,6 +24,9 @@ const Home: NextPage = (props) => {
                 <div className={styles.main}>
                     <Article title="fukuoka" articles={props.topArticles}/>
                 </div>
+                <div className={styles.aside}>
+                    <Weather title='fukuoka' weather={props.weather}/>
+                </div>
             </div>
         </MainLayout>
     )
@@ -35,7 +38,7 @@ export const getStaticProps = async () => {
     // newsAPIの記事を取得
     const articleCount = 10
     const keyword = '福岡'
-    const startDate = moment().subtract(1, 'weeks').format('YYYY-MM-DD')
+    const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
     const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     console.log(newsApiKey)
@@ -45,11 +48,22 @@ export const getStaticProps = async () => {
     const topJson = await topRes.json()
     const topArticles = topJson?.articles
 
+    // OpenWeatherMapの天気の情報を取得
+    const lat = 33.606392
+    const lon = 130.41806
+    const exclude = "hourly,minutely"
+    const weatherApiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_HASH
+    const weatherRes = await fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&exclude=${exclude}&appid=${weatherApiKey}`
+    )
+    const weather = await weatherRes.json() 
+
     return {
         props: {
             topArticles,
+            weather
         },
-        revalidate: 60 * 60 // とりあえず1時間
+        revalidate: 60 * 1
     }
 }
 
