@@ -7,9 +7,9 @@ import Nav from '../src/components/nav'
 import Weather from '../src/components/weather/area'
 import styles from '../styles/Home.module.scss'
 import moment from 'moment'
-import types from '../src/types'
+import Props from '../src/components/types'
 
-const Home: NextPage<types> = (props) => {
+const Home: NextPage<Props> = (props) => {
     console.log({props})
     return (
         <MainLayout>
@@ -44,8 +44,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
             params = {
                 area_name: 'tokyo',
                 area_name_ja: '東京',
-                lat: 35.4122,
-                lon: 139.4130,
+                lat: 35.689499,
+                lon: 139.691711,
             }
         break
         case 'osaka':

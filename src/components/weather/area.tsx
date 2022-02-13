@@ -14,15 +14,15 @@ const Weather: React.FC<Props> = ({weather, title}) => {
         <section className={styles.weather}>
             <h1>{title && title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}</h1>
             <div className={styles.weather__main}>
+                <span>{currentWeatherMain}</span>
                 <div className={styles.weather__top}>
                     <div className={styles.weather__heading}>
-                        <a>{currentWeatherMain}</a>
                         <p>{currentWeatherTemp}<span>°C</span></p>
                     </div>
                     <Image
                         className={styles.weather__icon}
                         src={`/img/weatherIcons/${currentWeatherIcon}.svg`}
-                        alt={`${title} && ${title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}'s weather icon`}
+                        alt={`${title} && ${title}.charAt(0).toUpperCase() + ${title}.slice(1).toLowerCase()}'s weather icon`}
                         loading='eager'
                         width={52}
                         height={52}

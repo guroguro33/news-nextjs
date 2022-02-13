@@ -5,37 +5,40 @@ import Props from '../types'
 
 const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const Weather: React.FC<Props> = ({weather, title}) => {
-    const currentWeatherMain = weather.current.weather[0].main
-    const currentWeatherTemp = Math.round(weather.current.temp)
-    const currentWeatherIcon = weather.current.weather[0].icon.slice(0, 2) + 'd'
-    console.log({weather})
+const Weather: React.FC<Props> = (weatherInfos) => {
+    console.log(weatherInfos.data)
     return (
         <section className={styles.weather}>
-            <h1>{title && title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}</h1>
-            <div className={styles.weather__main}>
-                <div className={styles.weather__top}>
-                    <div className={styles.weather__heading}>
-                        <a>{currentWeatherMain}</a>
-                        <p>{currentWeatherTemp}<span>°C</span></p>
+            {weatherInfos.data.map((weather, index) => {
+                return (
+                    <div key={index}>
+                        <h1>{weather.name && weather.name.charAt(0).toUpperCase() + weather.name.slice(1).toLowerCase()}</h1>
+                        <div className={styles.weather__main}>
+                            <span>{weather.weather[0].main}</span>
+                            <div className={styles.weather__top}>
+                                <div className={`${styles.weather__heading} mr-100`}>
+                                    <p>{Math.round(weather.main.temp)}<span>°C</span></p>
+                                </div>
+                                <Image
+                                    className={styles.weather__icon}
+                                    src={`/img/weatherIcons/${weather.weather[0].icon.slice(0, 2) + 'd'}.svg`}
+                                    alt={`${weather.name} && ${weather.name.charAt(0).toUpperCase() + weather.name.slice(1).toLowerCase()}'s weather icon`}
+                                    loading='eager'
+                                    width={52}
+                                    height={52}
+                                    priority
+                                />
+                            </div>
+                        </div>            
                     </div>
-                    <Image
-                        className={styles.weather__icon}
-                        src={`/img/weatherIcons/${currentWeatherIcon}.svg`}
-                        alt={`${title} && ${title.charAt(0).toUpperCase() + title.slice(1).toLowerCase()}'s weather icon`}
-                        loading='eager'
-                        width={52}
-                        height={52}
-                        priority
-                    />
-                </div>
-                <div className={styles.weather__bottom}>
-                    <Link href="https://weathernews.jp/onebox/">
-                    <a target="_blank" rel="noopener">
-                        ウェザーニュース
-                    </a>
-                    </Link>
-                </div>
+                )
+            })}
+            <div className={styles.weather__bottom}>
+                <Link href="https://weathernews.jp/onebox/">
+                <a target="_blank" rel="noopener">
+                    ウェザーニュース
+                </a>
+                </Link>
             </div>
         </section>
     )
