@@ -11,8 +11,20 @@ type Props = {
             }
         }
     ],
+    topArticles?: [
+        article: {
+            author: string,
+            title: string,
+            publishedAt: string,
+            url: string,
+            urlToImage: string,
+            source: {
+                name: string
+            }
+        }
+    ],
     title?: string,
-    weather?: {
+    weather: {
         current: {
             temp: number,
             clouds: number,
@@ -40,7 +52,11 @@ type Props = {
                 ]
             }
         ]
-    }
+    },
+    data: {
+        weatherInfos?: {
+        }
+    },
 }
 
 export default Props

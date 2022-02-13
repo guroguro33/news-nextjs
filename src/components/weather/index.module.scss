@@ -1,14 +1,13 @@
 .weather {
-  border: 1.2px solid rgba(333, 333, 333, 0.5);
+  border: 1.2px solid rgba(135, 135, 135, 0.5);
   border-radius: 15px;
   padding: 0 20px 0 20px;
   margin: 30px 20px 0 20px;
   h1 {
-    font-weight: 1000;
+    // font-weight: 1000;
     font-size: 16px;
-    color: rgb(233, 163, 163);
     padding: 12px 0;
-    border-bottom: 1px solid rgba(150, 113, 113, 0.5);
+    border-bottom: 1px solid rgba(135, 135, 135, 0.5);
   }
 }
 
@@ -64,9 +63,9 @@
 
 .weather__bottom {
   padding: 10px 0;
-  border-top: 1px solid rgba(150, 113, 113, 0.5);
+  border-top: 1px solid rgba(135, 135, 135, 0.5);
   a {
-    color: rgba(233, 163, 163, 0.8);
+    color: inherit;
     font-size: 12px;
     text-align: right;
   }
