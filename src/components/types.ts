@@ -23,6 +23,9 @@ type Props = {
             }
         }
     ],
+    params: {
+        area_name: string
+    }
     title?: string,
     weather: {
         current: {
@@ -52,10 +55,6 @@ type Props = {
                 ]
             }
         ]
-    },
-    data: {
-        weatherInfos?: {
-        }
     },
 }
 
