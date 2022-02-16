@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetStaticPropsContext } from 'next'
 import { GetStaticProps, GetStaticPaths } from 'next';
 import MainLayout  from '../src/layouts/index'
 import Head from 'next/head'
@@ -36,7 +36,7 @@ const Home: NextPage<Props> = (props) => {
 
 export default Home
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps = async (context: GetStaticPropsContext<{ area_name: string }>) => {
     // API用定数を地域別に設定
     let params = {}
     switch (context.params.area_name) {
@@ -105,7 +105,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [
             {params: {area_name: 'tokyo'}},
@@ -113,7 +113,7 @@ export const getStaticPaths = async () => {
             {params: {area_name: 'fukuoka'}},
             {params: {area_name: 'sapporo'}},
         ],
-        fallback: false
+        fallback: false // パスがないときは404を返す
     }
 }
 
