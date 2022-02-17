@@ -23,11 +23,14 @@ type Props = {
             }
         }
     ],
-    params: {
-        area_name: string
+    params?: {
+        area_name: string,
+        area_name_ja: string,
+        lat: number,
+        lon: number,
     }
     title?: string,
-    weather: {
+    weather?: {
         current: {
             temp: number,
             clouds: number,
