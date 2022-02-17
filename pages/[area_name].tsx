@@ -14,7 +14,7 @@ const Home: NextPage<Props> = (props) => {
     return (
         <MainLayout>
             <Head>
-                <title>{props.params.area_name.charAt(0).toUpperCase() + props.params.area_name.slice(1).toLowerCase()} | BTM Area News</title>
+                <title>{props.params && (props.params.area_name.charAt(0).toUpperCase() + props.params.area_name.slice(1).toLowerCase())} | BTM Area News</title>
             </Head>
             <div className={styles.contents}>
                 <div className={styles.nav}>
@@ -24,10 +24,10 @@ const Home: NextPage<Props> = (props) => {
                 </div>
                 <div className={styles.blank} />
                 <div className={styles.main}>
-                    <Article title={props.params.area_name} articles={props.topArticles}/>
+                    <Article title={props.params && props.params.area_name} articles={props.topArticles}/>
                 </div>
                 <div className={styles.aside}>
-                    <Weather title={props.params.area_name} weather={props.weather}/>
+                    <Weather title={props.params && props.params.area_name} weather={props.weather}/>
                 </div>
             </div>
         </MainLayout>
@@ -36,46 +36,48 @@ const Home: NextPage<Props> = (props) => {
 
 export default Home
 
-export const getStaticProps = async (context: GetStaticPropsContext<{ area_name: string }>) => {
+export const getStaticProps = async (context: GetStaticPropsContext) => {
     // API用定数を地域別に設定
-    let params = {}
-    switch (context.params.area_name) {
-        case 'tokyo':
-            params = {
-                area_name: 'tokyo',
-                area_name_ja: '東京',
-                lat: 35.689499,
-                lon: 139.691711,
-            }
-        break
-        case 'osaka':
-            params = {
-                area_name: 'osaka',
-                area_name_ja: '大阪',
-                lat: 34.675705,
-                lon: 135.526343,
-            }
-        break
-        case 'fukuoka':
-            params = {
-                area_name: 'fukuoka',
-                area_name_ja: '福岡',
-                lat: 33.606392,
-                lon: 130.41806,
-            }
-        break
-        case 'sapporo':
-            params = {
-                area_name: 'sapporo',
-                area_name_ja: '札幌',
-                lat: 43.064171,
-                lon: 141.346939,
-            }
-        break
+    let params
+    if (context.params) {
+        switch (context.params.area_name) {
+            case 'tokyo':
+                 params = {
+                    area_name: 'tokyo',
+                    area_name_ja: '東京',
+                    lat: 35.689499,
+                    lon: 139.691711,
+                }
+            break
+            case 'osaka':
+                params = {
+                    area_name: 'osaka',
+                    area_name_ja: '大阪',
+                    lat: 34.675705,
+                    lon: 135.526343,
+                }
+            break
+            case 'fukuoka':
+                params = {
+                    area_name: 'fukuoka',
+                    area_name_ja: '福岡',
+                    lat: 33.606392,
+                    lon: 130.41806,
+                }
+            break
+            case 'sapporo':
+                params = {
+                    area_name: 'sapporo',
+                    area_name_ja: '札幌',
+                    lat: 43.064171,
+                    lon: 141.346939,
+                }
+            break
+        }
     }
     // newsAPIの記事を取得
     const articleCount = 10
-    const keyword = params.area_name_ja
+    const keyword = params && params.area_name_ja
     const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
     const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
@@ -86,8 +88,8 @@ export const getStaticProps = async (context: GetStaticPropsContext<{ area_name:
     const topArticles = topJson?.articles
 
     // OpenWeatherMapの天気の情報を取得
-    const lat = params.lat
-    const lon = params.lon
+    const lat = params && params.lat
+    const lon = params && params.lon
     const exclude = "hourly,minutely"
     const weatherApiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_HASH
     const weatherRes = await fetch(
