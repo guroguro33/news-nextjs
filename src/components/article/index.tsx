@@ -1,6 +1,5 @@
 import styles from "./index.module.scss"
 import moment from "moment"
-import Image from 'next/image'
 import Props from "../types"
 
 const Article: React.FC<Props> = ({ articles, title }) => {
@@ -22,7 +21,12 @@ const Article: React.FC<Props> = ({ articles, title }) => {
                                 </p>
                             </div>
                             {article.urlToImage && (
-                                <img className={styles.article__img} key={index} src={article.urlToImage} alt={`${article.title} image`} />
+                                <img
+                                    className={styles.article__img}
+                                    key={index}
+                                    src={article.urlToImage}
+                                    alt={`${article.title} image`}
+                                />
                             )}
                         </article>
                     </a>
