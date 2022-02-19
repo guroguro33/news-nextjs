@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import styles from '../weather/index.module.scss'
 import Link from 'next/link'
 import Props from '../types'
@@ -19,14 +18,13 @@ const Weather: React.FC<Props> = ({weatherInfos}) => {
                                 <div className={`${styles.weather__heading} mr-100`}>
                                     <p>{Math.round(weather.main.temp)}<span>°C</span></p>
                                 </div>
-                                <Image
+                                <img
                                     className={styles.weather__icon}
                                     src={`/img/weatherIcons/${weather.weather[0].icon.slice(0, 2) + 'd'}.svg`}
                                     alt={`${weather.name} && ${weather.name.charAt(0).toUpperCase() + weather.name.slice(1).toLowerCase()}'s weather icon`}
                                     loading='eager'
                                     width={52}
                                     height={52}
-                                    priority
                                 />
                             </div>
                         </div>            
