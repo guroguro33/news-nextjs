@@ -59,6 +59,20 @@ type Props = {
             }
         ]
     },
+    weatherInfos?: [
+        weather: {
+            name: string,
+            main: {
+                temp: number
+            },
+            weather: [ // 中身が配列の場合
+                conditions: {
+                    main: string,
+                    icon: string
+                }
+            ]
+        }
+    ]
 }
 
 export default Props

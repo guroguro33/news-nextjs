@@ -6,9 +6,9 @@ import Props from '../types'
 const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const Weather: React.FC<Props> = ({weather, title}) => {
-    const currentWeatherMain = weather.current.weather[0].main
-    const currentWeatherTemp = Math.round(weather.current.temp)
-    const currentWeatherIcon = weather.current.weather[0].icon.slice(0, 2) + 'd'
+    const currentWeatherMain = weather && weather.current.weather[0].main
+    const currentWeatherTemp = weather ? Math.round(weather.current.temp) : 0;
+    const currentWeatherIcon = weather && (weather.current.weather[0].icon.slice(0, 2) + 'd')
     console.log({weather})
     return (
         <section className={styles.weather}>

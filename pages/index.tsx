@@ -26,7 +26,7 @@ const Home: NextPage<Props> = (props) => {
                     <Article title="Area Topics" articles={props.topArticles}/>
                 </div>
                 <div className={styles.aside}>
-                    <Weather data={props.weatherInfos}/>
+                    <Weather weatherInfos={props.weatherInfos}/>
                 </div>
             </div>
         </MainLayout>
