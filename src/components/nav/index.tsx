@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import styles from './index.module.scss'
-import Image from 'next/image'
 
 const TOPICS = [
     {
@@ -35,13 +34,12 @@ const Nav: React.FC = () => {
                             <Link href={`${topic.path}`}>
                                 <a>
                                     <span>
-                                        <Image
+                                        <img
                                             src={`/img/navIcons/${topic.icon}.png`}
                                             alt={`${topic.title} icon`}
                                             loading="eager"
                                             width={33}
                                             height={33}
-                                            priority
                                         />
                                     </span>
                                     <span>{topic.title}</span>
