@@ -1,17 +1,21 @@
 import styles from "./index.module.scss"
 import Link from "next/link"
 
-function Header():JSX.Element {
+type HeaderProps = {
+    toggleIsNavShown: () => void,
+}
+
+function Header({toggleIsNavShown}: HeaderProps):JSX.Element {
     return (
         <section className={styles.container}>
             <header className={styles.header}>
                 <div className={styles.header__icon}>
-                    <img 
+                    <img
+                        className={styles.header__icon_item}
+                        onClick={() => toggleIsNavShown()}
                         src="/img/headerIcon/menu.png"
                         alt="menu icon"
                         loading="eager"
-                        width={35}
-                        height={35}
                     />
                 </div>
                 <h1 style={{ letterSpacing: "1px", textAlign: "left" }}>

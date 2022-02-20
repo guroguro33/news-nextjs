@@ -1,5 +1,6 @@
 import type { NextPage, GetStaticPropsContext } from 'next'
 import { GetStaticProps, GetStaticPaths } from 'next';
+import { useState } from 'react';
 import MainLayout  from '../src/layouts/index'
 import Head from 'next/head'
 import Article from '../src/components/article'
@@ -10,19 +11,23 @@ import moment from 'moment'
 import Props from '../src/components/types'
 
 const Home: NextPage<Props> = (props) => {
-    console.log({props})
+    console.log({ props })
+    const [isNavShown, setIsNavShown] = useState(true);
+    const toggleIsNavShown = (): void => setIsNavShown(!isNavShown)
+    console.log(isNavShown)
+
     return (
-        <MainLayout>
+        <MainLayout toggleIsNavShown={toggleIsNavShown}>
             <Head>
                 <title>{props.params && (props.params.area_name.charAt(0).toUpperCase() + props.params.area_name.slice(1).toLowerCase())} | BTM Area News</title>
             </Head>
             <div className={styles.contents}>
                 <div className={styles.nav}>
-                    <nav>
+                    <nav style={isNavShown ? { display: 'block' } : { display: 'none' }}>
                         <Nav />
                     </nav>
                 </div>
-                <div className={styles.blank} />
+                <div className={isNavShown ? styles.blank : styles.blank__hidden_nav} />
                 <div className={styles.main}>
                     <Article title={props.params && props.params.area_name} articles={props.topArticles}/>
                 </div>
@@ -36,7 +41,7 @@ const Home: NextPage<Props> = (props) => {
 
 export default Home
 
-export const getStaticProps = async (context: GetStaticPropsContext) => {
+export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
     // API用定数を地域別に設定
     let params
     if (context.params) {

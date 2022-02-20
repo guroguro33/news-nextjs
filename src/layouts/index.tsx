@@ -2,13 +2,14 @@ import Header from "../components/header"
 import styles from "./index.module.scss"
 
 type LayoutProps = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    toggleIsNavShown: () => void,
 };
 
-function MainLayout ({children}: LayoutProps):JSX.Element {
+function MainLayout ({children, toggleIsNavShown}: LayoutProps):JSX.Element {
     return (
         <>
-            <Header />
+            <Header toggleIsNavShown={toggleIsNavShown} />
             <main className={styles.main}>{children}</main>
         </>
     );
