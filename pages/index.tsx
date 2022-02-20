@@ -1,27 +1,32 @@
 import type { NextPage } from 'next'
+import { useState } from 'react'
 import  MainLayout  from '../src/layouts/index'
 import Head from 'next/head'
 import Article from '../src/components/article'
 import Nav from '../src/components/nav'
-import Image from 'next/image'
 import styles from '../styles/Home.module.scss'
 import Weather from '../src/components/weather'
 import moment from 'moment'
 import Props from '../src/components/types'
+import { getDisplayName } from 'next/dist/shared/lib/utils'
 
 const Home: NextPage<Props> = (props) => {
+    const [isNavShown, setIsNavShown] = useState(true);
+    const toggleIsNavShown = (): void => setIsNavShown(!isNavShown)
+    console.log(isNavShown)
+
     return (
-        <MainLayout>
+        <MainLayout toggleIsNavShown={toggleIsNavShown}>
             <Head>
                 <title>BTM Area News</title>
             </Head>
             <div className={styles.contents}>
                 <div className={styles.nav}>
-                    <nav>
+                    <nav style={isNavShown ? { display: 'block' } : { display: 'none' }}>
                         <Nav />
                     </nav>
                 </div>
-                <div className={styles.blank} />
+                <div className={isNavShown ? styles.blank : styles.blank__hidden_nav} />
                 <div className={styles.main}>
                     <Article title="Area Topics" articles={props.topArticles}/>
                 </div>
