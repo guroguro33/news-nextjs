@@ -11,10 +11,8 @@ import moment from 'moment'
 import Props from '../src/components/types'
 
 const Home: NextPage<Props> = (props) => {
-    console.log({ props })
     const [isNavShown, setIsNavShown] = useState(true);
     const toggleIsNavShown = (): void => setIsNavShown(!isNavShown)
-    console.log(isNavShown)
 
     return (
         <MainLayout toggleIsNavShown={toggleIsNavShown}>
@@ -87,7 +85,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     const endDate = moment().format('YYYY-MM-DD')
     const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     const topRes = await fetch(
-        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${newsApiKey}`
+        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&excludeDomains=himasoku.com,lifehacker.jp,news4vip.livedoor.biz&sortBy=popularity&apiKey=${newsApiKey}`
     )
     const topJson = await topRes.json()
     const topArticles = topJson?.articles

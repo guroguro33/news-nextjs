@@ -17,13 +17,21 @@
   padding: 15px;
   border-radius: 10px;
 }
-.article__title {
+
+.article__wrapper {
   flex: 4;
   margin-right: 5px;
 }
 
+.article__title {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .article__time {
-  opacity: 0.5;
+  font-size: 0.8em;
+  opacity: 0.6;
 }
 
 .article__img {

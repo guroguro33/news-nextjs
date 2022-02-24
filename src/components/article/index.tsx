@@ -3,7 +3,7 @@ import moment from "moment"
 import Props from "../types"
 
 const Article: React.FC<Props> = ({ articles, title }) => {
-    // console.log({articles})
+    console.log({articles})
     return (
         <section className={styles.article}>
             <div className={styles.article__heading}>
@@ -14,10 +14,10 @@ const Article: React.FC<Props> = ({ articles, title }) => {
                 return (
                     <a href={article.url} key={index} target="_blank" rel="noreferrer">
                         <article className={styles.article__main }>
-                            <div className={styles.article__title}>
-                                <p>{article.title}</p>
+                            <div className={styles.article__wrapper}>
+                                <p className={styles.article__title}>{article.title}</p>
                                 <p className={styles.article__time}>
-                                    {article.source.name} - {time && `${time}時間前`}
+                                    {article.source.name} - {(time != 'a') ? `${time}時間前` : ''}
                                 </p>
                             </div>
                             {article.urlToImage && (

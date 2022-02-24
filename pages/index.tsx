@@ -13,7 +13,6 @@ import { getDisplayName } from 'next/dist/shared/lib/utils'
 const Home: NextPage<Props> = (props) => {
     const [isNavShown, setIsNavShown] = useState(true);
     const toggleIsNavShown = (): void => setIsNavShown(!isNavShown)
-    console.log(isNavShown)
 
     return (
         <MainLayout toggleIsNavShown={toggleIsNavShown}>
@@ -28,7 +27,7 @@ const Home: NextPage<Props> = (props) => {
                 </div>
                 <div className={isNavShown ? styles.blank : styles.blank__hidden_nav} />
                 <div className={styles.main}>
-                    <Article title="Area Topics" articles={props.topArticles}/>
+                    <Article title="Headline" articles={props.topArticles}/>
                 </div>
                 <div className={styles.aside}>
                     <Weather weatherInfos={props.weatherInfos}/>
@@ -42,13 +41,9 @@ export default Home
 
 export const getStaticProps = async () => {
     // newsAPIの記事を取得
-    const articleCount = 10
-    const keyword = '東京 OR 大阪 OR 福岡 OR 札幌'
-    const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD')
-    const endDate = moment().format('YYYY-MM-DD')
     const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     const topRes = await fetch(
-        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&sortBy=popularity&apiKey=${newsApiKey}`
+        `https://newsapi.org/v2/top-headlines?country=jp&apiKey=${newsApiKey}`
     )
     const topJson = await topRes.json()
     const topArticles = topJson?.articles
@@ -83,7 +78,6 @@ export const getStaticProps = async () => {
         let result = await fetch(
             `https://api.openweathermap.org/data/2.5/weather?lat=${city_info.lat}&lon=${city_info.lon}&units=metric&appid=${weatherApiKey}`
         )
-        console.log(result)
         
         return result.json()
     }))

@@ -8,6 +8,15 @@ const Weather: React.FC<Props> = ({weather, title}) => {
     const currentWeatherMain = weather && weather.current.weather[0].main
     const currentWeatherTemp = weather ? Math.round(weather.current.temp) : 0;
     const currentWeatherIcon = weather && (weather.current.weather[0].icon.slice(0, 2) + 'd')
+    let weatherNewsUrl: string = ''
+    switch(title) {
+        case 'sapporo':
+            weatherNewsUrl = 'https://weathernews.jp/onebox/tenki/douou/'
+        break;
+        default:
+            weatherNewsUrl = `https://weathernews.jp/onebox/tenki/${title}/`
+        break;
+    }
     console.log({weather})
     return (
         <section className={styles.weather}>
@@ -64,7 +73,7 @@ const Weather: React.FC<Props> = ({weather, title}) => {
                     </ul>
                 </div>
                 <div className={styles.weather__bottom}>
-                    <Link href="https://weathernews.jp/onebox/">
+                    <Link href={weatherNewsUrl}>
                     <a target="_blank" rel="noopener">
                         ウェザーニュース
                     </a>
