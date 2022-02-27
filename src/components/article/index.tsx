@@ -17,7 +17,7 @@ const Article: React.FC<Props> = ({ articles, title }) => {
                             <div className={styles.article__wrapper}>
                                 <p className={styles.article__title}>{article.title}</p>
                                 <p className={styles.article__time}>
-                                    {article.source.name} - {(time != 'a') ? `${time}時間前` : ''}
+                                    {article.source.name}{(time != 'a') ? ` - ${time}時間前` : ''}
                                 </p>
                             </div>
                             {article.urlToImage && (

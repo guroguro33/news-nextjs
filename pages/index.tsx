@@ -6,9 +6,7 @@ import Article from '../src/components/article'
 import Nav from '../src/components/nav'
 import styles from '../styles/Home.module.scss'
 import Weather from '../src/components/weather'
-import moment from 'moment'
 import Props from '../src/components/types'
-import { getDisplayName } from 'next/dist/shared/lib/utils'
 
 const Home: NextPage<Props> = (props) => {
     const [isNavShown, setIsNavShown] = useState(true);
@@ -30,7 +28,7 @@ const Home: NextPage<Props> = (props) => {
                     <Article title="Headline" articles={props.topArticles}/>
                 </div>
                 <div className={styles.aside}>
-                    <Weather weatherInfos={props.weatherInfos}/>
+                    <Weather weatherInfos={props.weatherInfos} location={props.location}/>
                 </div>
             </div>
         </MainLayout>
@@ -70,6 +68,11 @@ export const getStaticProps = async () => {
             lat: 43.064171,
             lon: 141.346939,
         },
+        {
+            area_name: 'syonan',
+            lat: 35.341942,
+            lon: 139.470001,
+        },
     ]
     const exclude = "hourly,minutely"
     const weatherApiKey = process.env.NEXT_PUBLIC_OPEN_WEATHER_API_HASH
@@ -86,7 +89,8 @@ export const getStaticProps = async () => {
     return {
         props: {
             topArticles,
-            weatherInfos
+            weatherInfos,
+            location
         },
         revalidate: 60 * 60 // 1時間キャッシュ
     }

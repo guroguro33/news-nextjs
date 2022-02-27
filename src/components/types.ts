@@ -72,6 +72,13 @@ type Props = {
                 }
             ]
         }
+    ],
+    location?: [
+        location: {
+            area_name: string
+            lat: number,
+            lon: number
+        }
     ]
 }
 

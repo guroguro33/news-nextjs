@@ -76,16 +76,24 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
                     lon: 141.346939,
                 }
             break
+            case 'syonan':
+                params = {
+                    area_name: 'syonan',
+                    area_name_ja: '神奈川',
+                    lat: 35.341942,
+                    lon: 139.470001,
+                }
+            break
         }
     }
     // newsAPIの記事を取得
-    const articleCount = 10
+    const articleCount = 15
     const keyword = params && params.area_name_ja
     const startDate = moment().subtract(1, 'days').format('YYYY-MM-DD')
     const endDate = moment().format('YYYY-MM-DD')
     const newsApiKey = process.env.NEXT_PUBLIC_NEWS_API_HASH
     const topRes = await fetch(
-        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&excludeDomains=himasoku.com,lifehacker.jp,news4vip.livedoor.biz&sortBy=popularity&apiKey=${newsApiKey}`
+        `https://newsapi.org/v2/everything?pageSize=${articleCount}&q=${keyword}&from=${startDate}&to=${endDate}&excludeDomains=himasoku.com,lifehacker.jp,news4vip.livedoor.biz,matsu23.blog.shinobi.jp,alfalfalfa.com,machicon.jp,fashionsnap.com&sortBy=popularity&apiKey=${newsApiKey}`
     )
     const topJson = await topRes.json()
     const topArticles = topJson?.articles
@@ -117,6 +125,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
             {params: {area_name: 'osaka'}},
             {params: {area_name: 'fukuoka'}},
             {params: {area_name: 'sapporo'}},
+            {params: {area_name: 'syonan'}},
         ],
         fallback: false // パスがないときは404を返す
     }

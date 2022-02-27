@@ -4,14 +4,13 @@ import Props from '../types'
 
 const week = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const Weather: React.FC<Props> = ({weatherInfos}) => {
-    console.log(weatherInfos)
+const Weather: React.FC<Props> = ({weatherInfos, location}) => {
     return (
         <section className={styles.weather}>
             {weatherInfos && weatherInfos.map((weather, index) => {
                 return (
                     <div key={index}>
-                        <h1>{weather.name && weather.name.charAt(0).toUpperCase() + weather.name.slice(1).toLowerCase()}</h1>
+                        <h1>{location && location[index].area_name.charAt(0).toUpperCase() + location[index].area_name.slice(1).toLowerCase()}</h1>
                         <div className={styles.weather__main}>
                             <span>{weather.weather[0].main}</span>
                             <div className={styles.weather__top}>

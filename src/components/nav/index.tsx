@@ -22,6 +22,11 @@ const TOPICS = [
         path: '/sapporo',
         title: 'Sapporo'
     },
+    {
+        icon: 'locationIcon',
+        path: '/syonan',
+        title: 'Syonan'
+    },
 ]
 
 const Nav: React.FC = () => {
